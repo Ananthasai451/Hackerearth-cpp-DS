@@ -1,0 +1,88 @@
+
+#include<iostream>
+using namespace std;
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    Node(int val)
+    {
+        data=val;
+        left=NULL;
+        right=NULL;
+    }
+};
+void inorder(struct Node* t)
+{
+    if(t==NULL)
+    {
+        return;
+    }
+    inorder(t->left);
+    cout<<(t->data)<<" ";
+    inorder(t->right);
+}
+int height(struct Node* t)
+{
+    if(t==NULL)
+    {
+        return 0;
+    }
+    int lh=height(t->left);
+    int rh=height(t->right);
+    return (max(lh,rh)+1);
+}
+int diameter(struct Node* t)
+{
+    if(t==NULL)
+    {
+        return 0;
+    }
+    int lh=height(t->left);
+    int rh=height(t->right);
+    int ld=diameter(t->left);
+    int rd=diameter(t->right);
+    return max(lh+rh+1,max(ld,rd));
+}
+int main()
+{
+   int n,r;
+   cin>>n>>r;
+   struct Node* root=new Node(r);
+   for(int i=1;i<n;i++)
+   {
+       string s;
+       int d;
+       cin>>s;
+       cin>>d;
+       int l=s.length();
+       struct Node* c=root;
+       int j=0;
+       while(s[j]&&c)
+       {
+           if(s[j]=='L')
+           {
+               if(c->left==NULL)
+               {
+                   c->left=new Node(0);
+               }
+               c=c->left;
+           }
+           else if(s[j]=='R')
+           {
+               if(c->right==NULL)
+               {
+                   c->right=new Node(0);
+               }
+               c=c->right;
+           }
+           j=j+1;
+       }
+       c->data=d;
+       
+   }
+   //inorder(root);
+   cout<<diameter(root);
+    
+}

@@ -1,0 +1,49 @@
+
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,c;
+    cin>>n>>c;
+    vector <int> a,co;
+    int arr[n];
+    for(int i=0;i<n-1;i++)
+    {
+        int z;
+        cin>>z;
+        a.push_back(z);
+    }
+    for (int i=0;i<n;i++)
+    {
+        int z;
+        cin>>z;
+        co.push_back(z);
+        arr[i]=-1;
+    }
+    for(int i=1;i<n;i++)
+    {
+        int x=i+1;
+        int y=co[i];
+        while(x!=1)
+        {
+            int p=a[x-2];
+            int col=co[p-1];
+            if(col==y)
+            {
+                arr[i]=p;
+                x=1;
+            }
+            else{
+                x=p;
+            } 
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+
+
+}

@@ -1,0 +1,106 @@
+
+#include<iostream>
+using namespace std;
+struct Node{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    Node(int val)
+    {
+        data=val;
+        left=NULL;
+        right=NULL;
+    }
+};
+void inorder(struct Node* temp)
+{
+    if (temp==NULL)
+    {
+        return ;
+    }
+    inorder(temp->left);
+    cout<<temp->data<<" ";
+    inorder(temp->right);
+}
+struct Node* insert(struct Node* pt,int p,int c,char ch)
+{
+    if(pt==NULL)
+    {
+        return pt;
+    }
+    if(pt->data==p)
+    {
+        struct Node* t=new Node(c);
+        if (ch=='L')
+        {
+            pt->left=t;
+        }
+        if(ch=='R')
+        {
+            pt->right=t;
+        }
+        return pt;
+    }
+    else
+    {
+        pt->left=insert(pt->left,p,c,ch);
+        pt->right=insert(pt->right,p,c,ch);
+    }
+    return pt;
+}
+int mirrec(struct Node* ptr1,struct Node* ptr2,int target)
+{
+    if(ptr1==NULL || ptr2==NULL)
+    {
+        return -1;
+    }
+    if(ptr1->data==target)
+    {
+        return ptr2->data;
+    }
+    if(ptr2->data==target)
+    {
+        return ptr1->data;
+    }
+    int mi=mirrec(ptr1->left,ptr2->right,target);
+    if(mi!=-1)
+    {
+        return mi;
+    }
+    mirrec(ptr1->right,ptr2->left,target);
+}
+int getmir(struct Node* t,int target)
+{
+    if(t==NULL)
+    {
+        return -1;
+    }
+    if(t->data==target)
+    {
+        return target;
+    }
+    return mirrec(t->left,t->right,target);
+
+}
+int main()
+{
+    int n,q;
+    cin>>n>>q;
+    struct Node* root=new Node(1);
+    int p,c;
+    char ch;
+    for(int i=0;i<n-1;i++)
+    {
+        cin>>p>>c>>ch;
+        insert(root,p,c,ch);
+    }
+    //inorder(root);
+    int o;
+    for(int i=0;i<q;i++)
+    {
+        cin>>o;
+        int mirr=getmir(root,o);
+        cout<<mirr<<endl;
+    }
+    return 0;
+}

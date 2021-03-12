@@ -1,0 +1,41 @@
+
+#include<iostream>
+#include<bits/stdc++.h>
+#include<iterator>
+#include<map>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin>>t;
+    for(int i=0;i<t;i++)
+    {
+        long long int n,m;
+        cin>>n>>m;
+        unordered_map<long long int,long long int> cl;
+        for(long long int j=0;j<n;j++)
+        {
+            long long int ca;
+            cin>>ca;
+            cl[ca]++;
+        }
+        for(long long int j=n;j<n+m;j++)
+        {
+            long long int bo;
+            cin>>bo;
+            if(cl[bo]>0)
+            {
+                cout<<"YES"<<endl;
+            }
+            else
+            {
+                cout<<"NO"<<endl;
+            }
+            cl[bo]++;
+        }
+    }
+    return 0;
+}
+

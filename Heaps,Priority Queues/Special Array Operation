@@ -1,0 +1,38 @@
+
+#include<iostream>
+#define ll long long
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ll n,q,t,ma,mi;
+    cin>>n>>q;
+    priority_queue<ll> mah;
+    ll s=0;
+    priority_queue<ll,vector<ll>,greater<ll>> mih;
+    for(ll i=0;i<n;i++)
+    {
+        cin>>t;
+        mah.push(t);
+        s+=t;
+        mih.push(t);
+    }
+    ll a[n]={0};
+    a[0]=s;
+    for(ll i=1;i<n;i++)
+    {
+        ma=mah.top();
+        mi=mih.top();
+        mah.pop();
+        mih.pop();
+        mah.push(ma-mi);
+        mih.push(ma-mi); 
+        a[i]=a[i-1]-(ma+mi)+(ma-mi);
+    }
+    for(ll i=0;i<q;i++)
+    {
+        cin>>t;
+        cout<<a[t]<<endl;
+    }
+    
+}

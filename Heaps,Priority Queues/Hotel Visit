@@ -1,0 +1,38 @@
+
+#define ll long long
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ll qu,k,c,x,y;
+    cin>>qu>>k;
+    int n=qu;
+    priority_queue<ll> pq;
+    for(ll i=0;i<qu;i++)
+    {
+        cin>>c;
+        if(c==1)
+        {
+            cin>>x>>y;
+            x=(x*x)+(y*y);
+            if(pq.size()==k)
+            {
+                if(x<pq.top())
+                {
+                    pq.pop();
+                    pq.push(x);
+                }
+            }
+            else
+            {
+                pq.push(x);
+            }
+        }
+        else if (c==2)
+        {
+            cout<<pq.top()<<endl;
+        
+        }
+    }
+}

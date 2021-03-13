@@ -1,0 +1,44 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<map>
+using namespace std;
+
+vector<vector<int> > Solve (vector<int> arr) {
+   vector<vector<int>> r;
+   int n=arr.size();
+   int re=n;
+   unordered_map<int,int> um;
+   for(int i=0;i<n;i++)
+   {
+       vector<int> temp;
+       um[arr[i]]++;
+       while(um[re]>0)
+       {
+           temp.push_back(re);
+           um[re]--;
+           re=re-1;
+       }
+       r.push_back(temp);
+   }
+   return r;
+}
+
+int main() {
+
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int N;
+    cin >> N;
+    vector<int> arr(N);
+    for (int i_arr = 0; i_arr < N; i_arr++) {
+        cin >> arr[i_arr];
+    }
+
+    vector<vector<int> > out_ = Solve(arr);
+    for (int i_out_ = 0; i_out_ < out_.size(); i_out_++) {
+        for (int j_out_ = 0; j_out_ < out_[i_out_].size(); j_out_++) {
+            cout << out_[i_out_][j_out_] << " ";
+        }
+        cout << "\n";
+    }
+}

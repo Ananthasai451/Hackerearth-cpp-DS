@@ -1,0 +1,30 @@
+
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<vector<long long>> v;
+    long long n,id,pz,nz,p,l,c,s,d;
+    cin>>n;
+    for(long long i=0;i<n;i++)
+    {
+        vector<long long>temp;
+        cin>>id>>pz>>p>>l>>c>>s;
+        nz=(p*50)+(l*5)+(c*10)+(s*20);
+        d=nz-pz;
+        temp.push_back(id);
+        temp.push_back(nz);
+        temp.push_back(d);
+        v.push_back(temp);
+    }
+    sort(v.begin(),v.end(),[](const vector<long long>& v1,const vector<long long>& v2){
+        return v1[2]!=v2[2]?v1[2]>v2[2]:v1[0]>v2[0];
+    });
+    for(long long i=0;i<5;i++)
+    {
+        cout<<v[i][0]<<" "<<v[i][1]<<endl;
+    }
+
+}
